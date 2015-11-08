@@ -1,0 +1,17 @@
+button.loginButton,
+button.logoutButton,
+h4.userName {
+  margin-left: 10px
+}
+
+a#menu-toggle {
+  margin-bottom: 10px
+}
+
+span.screenName {
+  color: gray
+}
+
+hr.tweetsLineBreak {
+  width: 100%
+}

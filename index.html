@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="twitterApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tweets Search App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link href="css/simple-sidebar.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div id="wrapper" ng-controller="TwitterController">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <div class="sidebar-nav">
+        <div class="sidebar-brand">
+          <a href="">
+            Tweets Search App
+          </a>
+        </div>
+        <hr>
+        <div>
+          <button class="loginButton btn btn-lg btn-info" ng-click="login()" ng-hide="if_authorized">Login with Twitter</button>
+        </div>
+        <div ng-show="if_authorized">
+          <h4 class="userName">Welcome back! {{user.name || "User"}}</h4>
+          <button class="logoutButton btn btn-lg btn-info" ng-click="logout()">Logout</button><br>
+        </div>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">  
+          <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+        </div>
+        <div ng-switch="if_authorized">
+          <div ng-switch-when="true">
+            <div class="row">
+              <input type="text" ng-model="$parent.keyword" ng-change="keyword &&getTweetsByKeyword()">
+            </div>
+            <div class="row" ng-show="tweets.length == 0">
+              <p>There is no search result for the keyword {{keyword}}.</p>
+            </div>
+            <div class="row" ng-repeat="tweet in tweets">
+              <div class="col-md-1">
+                <img ng-src="{{tweet.user.profile_image_url}}" alt="profile_image">
+              </div>
+              <div class="col-md-11">
+                <b>{{tweet.user.name}}</b> <span class="screenName">{{tweet.user.screen_name}}</span><br>
+                <p>{{tweet.text}}</p>
+                <small>created at {{tweet.created_at.split(" ").splice(0, 4).join(" ")}}</small>
+              </div>
+              <hr class="tweetsLineBreak">
+            </div>
+          </div>
+          <div ng-switch-when="false">
+            <h2>Welcome to Tweets Search App!</h2>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="/js/oauth.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-sanitize.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/controller.js"></script>
+  <script src="/js/services.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+</body>
+</html>
