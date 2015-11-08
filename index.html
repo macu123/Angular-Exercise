@@ -23,11 +23,11 @@
         </div>
         <hr>
         <div>
-          <button class="loginButton btn btn-lg btn-info" ng-click="login()" ng-hide="if_authorized">Login with Twitter</button>
+          <button class="loginButton btn btn-info" ng-click="login()" ng-hide="if_authorized">Login with Twitter</button>
         </div>
         <div ng-show="if_authorized">
           <h4 class="userName">Welcome back! {{user.name || "User"}}</h4>
-          <button class="logoutButton btn btn-lg btn-info" ng-click="logout()">Logout</button><br>
+          <button class="logoutButton btn btn-info" ng-click="logout()">Logout</button><br>
         </div>
       </div>
     </div>
