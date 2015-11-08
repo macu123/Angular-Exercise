@@ -1,18 +1,20 @@
 angular.module('twitterApp.services', []).factory('twitterService', function($q) {
   //constant declared globally
   var ENDPOINT = '/1.1/search/tweets.json?q=';
+  var PUBLICK_KEY = 'llUq8lrTe6qeqP-NZP89W9vXL8Q';
+  var PROVIDER = 'twitter';
   //initial state
   var authorizationResult = false;
 
   return {
     initialize: function() {
       //initialize OAuth.io with public key
-      OAuth.initialize('llUq8lrTe6qeqP-NZP89W9vXL8Q', {
+      OAuth.initialize(PUBLICK_KEY, {
         cache: true //execute the callback if the tokens are already there
       });
 
       //create an authorization result when initialize
-      authorizationResult = OAuth.create("twitter");
+      authorizationResult = OAuth.create(PROVIDER);
 
     },
 
@@ -33,7 +35,7 @@ angular.module('twitterApp.services', []).factory('twitterService', function($q)
     },
 
     clearCache: function() {
-      OAuth.clearCache('twitter');
+      OAuth.clearCache(PROVIDER);
       authorizationResult = false;
     },
 
