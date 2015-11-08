@@ -42,7 +42,7 @@
         <div ng-switch="if_authorized">
           <div ng-switch-when="true">
             <div class="row">
-              <input type="text" ng-model="$parent.keyword" ng-change="keyword &&getTweetsByKeyword()">
+              <input type="text" placeholder="Please type search keyword here" ng-model="$parent.keyword" ng-change="keyword &&getTweetsByKeyword()">
             </div>
             <div class="row" ng-show="tweets.length == 0">
               <p>There is no search result for the keyword {{keyword}}.</p>
