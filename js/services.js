@@ -1,4 +1,6 @@
 angular.module('twitterApp.services', []).factory('twitterService', function($q) {
+  //constant declared globally
+  var ENDPOINT = '/1.1/search/tweets.json?q=';
   //initial state
   var authorizationResult = false;
 
@@ -50,8 +52,8 @@ angular.module('twitterApp.services', []).factory('twitterService', function($q)
     getTweets: function(keyword) {
       //create a deferred object
       var deferred = $q.defer();
-      var endpoint = '/1.1/search/tweets.json?q=' + keyword;
-      var promise = authorizationResult.get(endpoint).done(function(data) {
+      var url = ENDPOINT + keyword;
+      var promise = authorizationResult.get(url).done(function(data) {
         deferred.resolve(data);
       }).fail(function(error) {
         deferred.reject(error);
