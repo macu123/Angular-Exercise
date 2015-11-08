@@ -1,4 +1,4 @@
-angular.module('twitterApp.services', []).factory('twitterService', function($q) {
+angular.module('tweetsSearchApp.services', []).factory('tweetsSearchService', function($q) {
   //constant declared globally
   var ENDPOINT = '/1.1/search/tweets.json?q=';
   var PUBLICK_KEY = 'llUq8lrTe6qeqP-NZP89W9vXL8Q';

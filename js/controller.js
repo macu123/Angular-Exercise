@@ -1,12 +1,12 @@
-app.controller('TwitterController', function($scope, $q, twitterService) {
+app.controller('tweetsSearchController', function($scope, $q, tweetsSearchService) {
   //indicate if users are authorized or not
   $scope.if_authorized = false;
 
-  twitterService.initialize();
+  tweetsSearchService.initialize();
 
   //use OAuth to get tweets according to keywords provided by users
   $scope.getTweetsByKeyword = function() {
-    twitterService.getTweets($scope.keyword).then(function(data) {
+    tweetsSearchService.getTweets($scope.keyword).then(function(data) {
       $scope.tweets = data.statuses;
     }, function() {
       alert("Cannot reach to Twitter API");
@@ -20,11 +20,11 @@ app.controller('TwitterController', function($scope, $q, twitterService) {
       location.reload();
     };
 
-    twitterService.connectToTwitter(callback);
+    tweetsSearchService.connectToTwitter(callback);
   };
 
   $scope.logout = function() {
-    twitterService.clearCache();
+    tweetsSearchService.clearCache();
     $scope.tweets = [];
     $scope.if_authorized = false;
   };
@@ -33,7 +33,7 @@ app.controller('TwitterController', function($scope, $q, twitterService) {
     return scope.if_authorized;
   }, function(newValue, oldValue) {
     if (newValue == true) {
-      twitterService.getUser().then(function(data) {
+      tweetsSearchService.getUser().then(function(data) {
         $scope.user = data;
       }, function() {
         alert("cannot reach to Twitter API");
@@ -42,7 +42,7 @@ app.controller('TwitterController', function($scope, $q, twitterService) {
   });
 
   //After authorization, users will still be login even if they close browser
-  if (twitterService.isReady()) {
+  if (tweetsSearchService.isReady()) {
     $scope.if_authorized = true;
   }
 
